@@ -1,0 +1,26 @@
+---
+version: "3"
+
+vars:
+  PHP_CMD: docker compose exec php
+
+tasks:
+  php:
+    desc: Run command on php container
+    cmds:
+      - docker compose exec php {{.CLI_ARGS}}
+
+  sf:
+    desc: Run bin/console command on php container
+    cmds:
+      - docker compose exec php bin/console {{.CLI_ARGS}}
+
+  phpunit:
+    desc: Run phpunit command on container
+    cmds:
+      - docker compose exec php bin/phpunit {{.CLI_ARGS}}
+
+  composer:
+    desc: Run composer command
+    cmds:
+      - "{{.PHP_CMD}} composer {{.CLI_ARGS}}"

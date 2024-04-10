@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Api;
+namespace Homebot\Tests\Api;
 
 use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 
