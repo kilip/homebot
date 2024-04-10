@@ -1,6 +1,7 @@
 # Production environment override
 services:
   php:
+    image: ${PHP_DOCKER_IMAGE}
     build:
       context: ./api
       target: frankenphp_prod
@@ -10,6 +11,7 @@ services:
       MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET}
 
   pwa:
+    image: ${PHP_DOCKER_IMAGE}
     build:
       context: ./pwa
       target: prod

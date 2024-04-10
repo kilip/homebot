@@ -1,7 +1,6 @@
 # Development environment override
 services:
   php:
-    image: ${PHP_DOCKER_IMAGE}
     build:
       context: ./api
       target: frankenphp_dev
@@ -23,7 +22,6 @@ services:
     tty: true
 
   pwa:
-    image: ${PWA_DOCKER_IMAGE}
     build:
       context: ./pwa
       target: dev
