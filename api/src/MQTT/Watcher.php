@@ -5,6 +5,7 @@ namespace Homebot\MQTT;
 use Homebot\MQTT\SubscriberInterface;
 use PhpMqtt\Client\ConnectionSettings;
 use PhpMqtt\Client\Contracts\MqttClient as MqttClientContract;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 class Watcher
 {
@@ -16,9 +17,15 @@ class Watcher
     public function __construct(
         private MqttClientContract $client,
         private ConnectionSettings $connectionSettings,
-        private array $subscribers = []
+        private array $subscribers = [],
+
+        #[Autowire('%env(APP_ENV)%')]
+        string $env = 'test'
     )
     {
+        if($env == 'test'){
+            $this->useLoop = false;
+        }
     }
 
     public function addSubscriber(SubscriberInterface $subscriber)
@@ -32,20 +39,16 @@ class Watcher
         $settings = $this->connectionSettings;
         $useLoop = $this->useLoop;
 
-        if($useLoop){
-            pcntl_signal(SIGINT, function (int $signal, $info) use ($client) {
-                $client->interrupt();
-            });
-        }
-
         $client->connect($settings);
-        $client->loop($useLoop);
         $this->registerSubscribers($client);
+        $client->loop($useLoop);
+
+        $client->disconnect();
     }
 
     public function stop(): void
     {
-        $this->client->disconnect();
+        $this->client->interrupt();
     }
 
     private function registerSubscribers(MqttClientContract $client): void

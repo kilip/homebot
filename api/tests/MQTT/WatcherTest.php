@@ -59,6 +59,20 @@ class WatcherTest extends TestCase
             ->method('subscribe')
             ->with('test', $callback, 0);
 
+        $client->expects($this->once())
+            ->method('disconnect');
+
         $watcher->start();
+    }
+
+    public function testStop()
+    {
+        $watcher = $this->watcher;
+        $client = $this->client;
+
+        $client->expects($this->once())
+            ->method('interrupt');
+
+        $watcher->stop();
     }
 }

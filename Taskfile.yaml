@@ -24,3 +24,8 @@ tasks:
     desc: Run composer command
     cmds:
       - "{{.PHP_CMD}} composer {{.CLI_ARGS}}"
+
+  php:shell:
+    desc: Executing bash to php container
+    cmds:
+      - "{{.PHP_CMD}} bash"
