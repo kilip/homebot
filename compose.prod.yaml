@@ -11,10 +11,12 @@ services:
       MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET}
 
   pwa:
-    image: ${PHP_DOCKER_IMAGE}
+    image: ${PWA_DOCKER_IMAGE}
     build:
       context: ./pwa
       target: prod
+    ports:
+      - "5173:5173"
 
   database:
     environment:
