@@ -48,7 +48,7 @@ ENV NODE_ENV production
 RUN addgroup --system --gid 1001 nodejs; \
 	adduser --system --uid 1001 nodejs
 
-COPY --from=builder --link /srv/app/build ./build
+COPY --from=builder --link /srv/app ./
 
 USER nodejs
 
@@ -57,4 +57,4 @@ EXPOSE 5173
 ENV PORT 5173
 ENV HOSTNAME "0.0.0.0"
 
-CMD ["pnpm", "start", "--host"]
+CMD ["npm", "run", "start", "--host"]
