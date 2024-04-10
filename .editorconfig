@@ -18,7 +18,7 @@ insert_final_newline = true
 [*.{js,html,ts,tsx}]
 indent_size = 2
 
-[*.json]
+[*.{json,json5}]
 indent_size = 2
 
 [*.md]
