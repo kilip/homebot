@@ -13,9 +13,7 @@ jobs:
     env:
       PHP_DOCKER_IMAGE: ghcr.io/kilip/homebot-php:${{ github.sha }}
       PWA_DOCKER_IMAGE: ghcr.io/kilip/homebot-pwa:${{ github.sha }}
-    permissions:
-      contents: 'read'
-      id-token: 'write'
+    permissions: 'write-all'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
