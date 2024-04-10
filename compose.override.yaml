@@ -36,7 +36,7 @@ services:
       - 5173:5173
   
   mosquitto:
-    container_name: homelab.mosquitto
+    container_name: homebot.mosquitto
     image: public.ecr.aws/docker/library/eclipse-mosquitto:2.0.18@sha256:cb3afd02611b0c58b328196ab00de0158322b4c1e014841fb182d2a0ea3a79b9
     restart: always
     volumes:
