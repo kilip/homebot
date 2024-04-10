@@ -34,6 +34,18 @@ services:
       WATCHPACK_POLLING: "true"
     ports:
       - 5173:5173
+  
+  mosquitto:
+    container_name: homelab.mosquitto
+    image: public.ecr.aws/docker/library/eclipse-mosquitto:2.0.18
+    restart: always
+    volumes:
+      - ./etc/mosquitto/mosquitto.passwd:/mosquitto/config/mosquitto.passwd:rw
+      - ./etc/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - ./vars/mosquitto:/data
+    user: "1000:1000"
+    ports:
+      - 1883:1883
 
 ###> doctrine/doctrine-bundle ###
   database:

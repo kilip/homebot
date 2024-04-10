@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace Homebot\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
