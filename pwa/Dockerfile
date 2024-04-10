@@ -1,8 +1,8 @@
-#syntax=docker/dockerfile:1.4
+#syntax=docker/dockerfile:1.4@sha256:9ba7531bd80fb0a858632727cf7a112fbfd19b17e94c4e84ced81e24ef1a0dbc
 
 
 # Versions
-FROM node:20-alpine AS node_upstream
+FROM node:20-alpine@sha256:7e227295e96f5b00aa79555ae166f50610940d888fc2e321cf36304cbd17d7d6 AS node_upstream
 
 
 # Base stage for dev and build
