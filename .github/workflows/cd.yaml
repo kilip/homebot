@@ -56,25 +56,3 @@ jobs:
           docker push ghcr.io/kilip/homebot-pwa:${{ github.ref_name }}
           docker push ghcr.io/kilip/homebot-php:latest
           docker push ghcr.io/kilip/homebot-pwa:latest
-
-  deploy:
-    name: Deploy
-    needs: [ build ]
-    uses: ./.github/workflows/deploy.yml
-    with:
-      docker-images-version: ${{ github.sha }}
-      gke-cluster: api-platform-demo
-      gke-zone: europe-west1-c
-    secrets:
-      gke-credentials: ${{ secrets.GKE_SA_KEY }}
-      gke-project: ${{ secrets.GKE_PROJECT }}
-      cloudflare-api-token: ${{ secrets.CF_API_TOKEN }}
-      cloudflare-zone-id: ${{ secrets.CF_ZONE_ID }}
-      keycloak-admin-password: ${{ secrets.KEYCLOAK_ADMIN_PASSWORD }}
-
-  check:
-    name: Check
-    needs: [ deploy ]
-    uses: ./.github/workflows/check.yml
-    with:
-      url: ${{needs.deploy.outputs.url}}
