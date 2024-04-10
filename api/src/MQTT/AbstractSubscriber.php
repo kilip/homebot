@@ -1,6 +1,6 @@
 <?php
 
-namespace Homelab\MQTT;
+namespace Homebot\MQTT;
 
 use Homebot\MQTT\SubscriberInterface;
 

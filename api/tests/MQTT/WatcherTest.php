@@ -45,7 +45,6 @@ class WatcherTest extends TestCase
 
         $subscriber->method('getTopic')->willReturn('test');
         $subscriber->method('getQos')->willReturn(0);
-        $subscriber->method('getHandler')->willReturn($callback);
 
         $watcher->addSubscriber($subscriber);
         $watcher->addSubscriber($subscriber);

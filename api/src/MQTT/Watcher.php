@@ -5,6 +5,7 @@ namespace Homebot\MQTT;
 use Homebot\MQTT\SubscriberInterface;
 use PhpMqtt\Client\ConnectionSettings;
 use PhpMqtt\Client\Contracts\MqttClient as MqttClientContract;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 class Watcher
@@ -17,6 +18,7 @@ class Watcher
     public function __construct(
         private MqttClientContract $client,
         private ConnectionSettings $connectionSettings,
+        private LoggerInterface $logger,
         private array $subscribers = [],
 
         #[Autowire('%env(APP_ENV)%')]
@@ -55,11 +57,21 @@ class Watcher
     {
         /** @var SubscriberInterface[] $subscribers */
         $subscribers = $this->subscribers;
+        $logger = $this->logger;
 
         foreach($subscribers as $subscriber){
+
+            // @codeCoverageIgnoreStart
+            $callback = function(string $topic, string $message, $retained) use($subscriber, $logger){
+                $logger->info('topic {0}', [$topic]);
+                $payload = new Payload($topic, $message, $retained);
+                $subscriber->handle($payload);
+            };
+            // @codeCoverageIgnoreEnd
+
             $client->subscribe(
                 $subscriber->getTopic(),
-                $subscriber->getHandler(),
+                $callback,
                 $subscriber->getQos()
             );
         }

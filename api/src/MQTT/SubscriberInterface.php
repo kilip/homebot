@@ -4,6 +4,6 @@ namespace Homebot\MQTT;
 
 interface SubscriberInterface {
     public function getTopic(): string;
-    public function getHandler(): callable;
+    public function handle(Payload $payload): void;
     public function getQos(): int;
 }

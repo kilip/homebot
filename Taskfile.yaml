@@ -29,3 +29,8 @@ tasks:
     desc: Executing bash to php container
     cmds:
       - "{{.PHP_CMD}} bash"
+
+  sf:
+    desc: Executing symfony bin/console command
+    cmds:
+      - "{{.PHP_CMD}} bin/console {{.CLI_ARGS}}"
