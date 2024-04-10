@@ -35,8 +35,8 @@ COPY --link pnpm-lock.yaml ./
 
 COPY --link . .
 
-RUN	pnpm install
-RUN pnpm run build
+RUN	pnpm install \
+	&& pnpm run build
 
 # Production image, copy all the files and run next
 FROM node_upstream AS prod
