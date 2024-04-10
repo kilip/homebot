@@ -28,8 +28,18 @@ ENV HOSTNAME localhost
 CMD ["sh", "-c", "pnpm install; pnpm dev --host"]
 
 
+FROM base AS builder
+
+COPY --link pnpm-lock.yaml ./
+RUN pnpm fetch --prod
+
+COPY --link . .
+
+RUN	pnpm install --frozen-lockfile --offline --prod && \
+	pnpm run build
+
 # Production image, copy all the files and run next
-FROM base AS prod
+FROM node_upstream AS prod
 
 WORKDIR /srv/app
 
@@ -40,8 +50,7 @@ ENV NEXT_TELEMETRY_DISABLED 1
 RUN addgroup --system --gid 1001 nodejs; \
 	adduser --system --uid 1001 nodejs
 
-RUN pnpm install && \
-	pnpm build
+COPY --from=builder --link /srv/app/public ./public
 
 USER nodejs
 
