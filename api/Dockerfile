@@ -1,10 +1,10 @@
-#syntax=docker/dockerfile:1.4
+#syntax=docker/dockerfile:1.4@sha256:9ba7531bd80fb0a858632727cf7a112fbfd19b17e94c4e84ced81e24ef1a0dbc
 
 # Adapted from https://github.com/dunglas/symfony-docker
 
 
 # Versions
-FROM ghcr.io/kilip/frankenphp-api:1.1.2-php8.3 AS frankenphp_upstream
+FROM ghcr.io/kilip/frankenphp-api:1.1.2-php8.3@sha256:0eafb6614f9cb03fd194d050074c1506d9823eabf2ec5aab8051d00a027df4c2 AS frankenphp_upstream
 
 
 # The different stages of this Dockerfile are meant to be built into separate images
