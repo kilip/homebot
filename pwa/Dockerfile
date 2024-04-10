@@ -31,12 +31,12 @@ CMD ["sh", "-c", "pnpm install; pnpm dev --host"]
 FROM base AS builder
 
 COPY --link pnpm-lock.yaml ./
-RUN pnpm fetch --prod
+# RUN pnpm fetch
 
 COPY --link . .
 
-RUN	pnpm install --frozen-lockfile --offline --prod && \
-	pnpm run build
+RUN	pnpm install
+RUN pnpm run build
 
 # Production image, copy all the files and run next
 FROM node_upstream AS prod
@@ -44,13 +44,11 @@ FROM node_upstream AS prod
 WORKDIR /srv/app
 
 ENV NODE_ENV production
-# Delete the following line in case you want to enable telemetry during runtime.
-ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN addgroup --system --gid 1001 nodejs; \
 	adduser --system --uid 1001 nodejs
 
-COPY --from=builder --link /srv/app/public ./public
+COPY --from=builder --link /srv/app/build ./build
 
 USER nodejs
 
