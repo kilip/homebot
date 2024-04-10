@@ -37,7 +37,7 @@ trim_trailing_whitespace = false
 [helm/api-platform/**.yaml]
 indent_size = 2
 
-[.github/workflows/*.yml]
+[.github/workflows/*.{yml,yaml}]
 indent_size = 2
 
 [.gitmodules]
