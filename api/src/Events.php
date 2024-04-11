@@ -9,10 +9,9 @@
  * file that was distributed with this source code.
  */
 
-use Homebot\Kernel;
+namespace Homebot;
 
-require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
-
-return function (array $context) {
-    return new Kernel($context['APP_ENV'], (bool) $context['APP_DEBUG']);
-};
+class Events
+{
+    public const MQTT_REGISTER_SUBSCRIBER = 'mqtt.register.subscriber';
+}
