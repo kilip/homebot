@@ -11,7 +11,9 @@
 
 namespace Homebot\Command;
 
+use Homebot\Configuration;
 use Homebot\Contracts\MqttClientInterface;
+use Homebot\Contracts\Repository\PowerMeterRepositoryInterface;
 use Homebot\Events;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -22,7 +24,9 @@ class MqttWatchCommand extends Command
 {
     public function __construct(
         private readonly EventDispatcherInterface $dispatcher,
-        private readonly MqttClientInterface $mqttClient
+        private readonly MqttClientInterface $mqttClient,
+        private readonly PowerMeterRepositoryInterface $powerMeterRepository,
+        private readonly Configuration $configuration
     ) {
         parent::__construct('mqtt:watch');
     }
@@ -31,14 +35,18 @@ class MqttWatchCommand extends Command
     {
         $mqttClient = $this->mqttClient;
 
+        $this->dispatcher->dispatch($this->configuration, Events::LOAD_CONFIGURATION);
+
         $this->gatherSubscribers();
 
+        // @codeCoverageIgnoreStart
         if (\function_exists('pcntl_signal')) {
             pcntl_async_signals(true);
             pcntl_signal(SIGINT, function () use ($mqttClient) {
                 $mqttClient->disconnect();
             });
         }
+        // @codeCoverageIgnoreEnd
 
         $mqttClient->connect();
 

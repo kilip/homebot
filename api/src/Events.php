@@ -14,4 +14,6 @@ namespace Homebot;
 class Events
 {
     public const MQTT_REGISTER_SUBSCRIBER = 'mqtt.register.subscriber';
+    public const LOAD_CONFIGURATION = 'homebot.configuration.load';
+    public const CONFIGURE_POWER_METER = 'homebot.power_meter.configure';
 }

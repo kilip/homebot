@@ -72,6 +72,7 @@ class Client implements MqttClientInterface
      */
     public function disconnect(): void
     {
+        $this->mqttClient->interrupt();
         $this->mqttClient->disconnect();
     }
 
@@ -91,7 +92,11 @@ class Client implements MqttClientInterface
         $client = $this->mqttClient;
 
         foreach ($this->subscribers as $subscriber) {
-            $client->subscribe($subscriber->getTopic(), [$subscriber, 'handler'], $subscriber->getQos());
+            $callback = function (string $topic, string $message, bool $retained) use ($subscriber) {
+                $payload = new Payload($topic, $message, $retained);
+                $subscriber->handler($payload);
+            };
+            $client->subscribe($subscriber->getTopic(), $callback, $subscriber->getQos());
         }
     }
 }

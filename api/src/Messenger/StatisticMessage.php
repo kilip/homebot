@@ -9,13 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Homebot\Contracts;
+namespace Homebot\Messenger;
 
-interface MqttPayloadInterface
+class StatisticMessage
 {
-    public function getTopic(): string;
-
-    public function getMessage(): string;
-
-    public function isRetained(): bool;
+    public function __construct(
+        public string $deviceId,
+        public string $state,
+        public string $timestamp
+    ) {
+    }
 }

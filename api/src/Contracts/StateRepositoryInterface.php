@@ -11,11 +11,12 @@
 
 namespace Homebot\Contracts;
 
-interface MqttPayloadInterface
+use Homebot\Entity\State;
+use Symfony\Component\Uid\Uuid;
+
+interface StateRepositoryInterface
 {
-    public function getTopic(): string;
+    public function store(State $state): void;
 
-    public function getMessage(): string;
-
-    public function isRetained(): bool;
+    public function findLast(Uuid $deviceId, string $unit): ?State;
 }

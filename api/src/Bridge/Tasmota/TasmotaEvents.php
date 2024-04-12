@@ -9,13 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Homebot\Contracts;
+namespace Homebot\Bridge\Tasmota;
 
-interface MqttPayloadInterface
+use Homebot\Events as HomebotEvents;
+
+class TasmotaEvents
 {
-    public function getTopic(): string;
-
-    public function getMessage(): string;
-
-    public function isRetained(): bool;
+    public const CONFIGURE_POWER_METER = HomebotEvents::CONFIGURE_POWER_METER.'.tasmota';
 }

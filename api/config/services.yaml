@@ -9,6 +9,7 @@ parameters:
     mqtt.hostname: '%env(MQTT_HOSTNAME)%'
     mqtt.username: '%env(MQTT_USERNAME)%'
     mqtt.password: '%env(MQTT_PASSWORD)%'
+    homebot.config_dir: '%kernel.project_dir%/config/homebot'
 
 services:
     # default configuration for services in *this* file
@@ -22,7 +23,8 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
-            - '../src/Cleanup'
+            - '../src/Bridge/Mqtt/AbstractSubscriber.php'
+            - '../src/Bridge/Tasmota/AbstractSubscriber/'
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 

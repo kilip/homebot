@@ -68,7 +68,7 @@ class ClientTest extends TestCase
 
         $this->mqttClient->expects($this->once())
             ->method('subscribe')
-            ->with('topic', [$subscriber, 'handler'], 1);
+            ->with('topic', $this->isType('callable'), 1);
 
         $this->sut->addSubscriber($subscriber);
         $this->sut->connect();
