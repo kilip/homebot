@@ -6,8 +6,11 @@
 parameters:
     mqtt.server: "%env(MQTT_SERVER)%"
     mqtt.port: "%env(int:MQTT_PORT)%"
+    mqtt.hostname: '%env(MQTT_HOSTNAME)%'
     mqtt.username: '%env(MQTT_USERNAME)%'
     mqtt.password: '%env(MQTT_PASSWORD)%'
+    homebot.config_dir: '%kernel.project_dir%/config/homebot'
+
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -20,7 +23,8 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
-            - '../src/MQTT/AbstractSubscriber.php'
+            - '../src/Bridge/Mqtt/AbstractSubscriber.php'
+            - '../src/Bridge/Tasmota/AbstractSubscriber/'
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
@@ -35,5 +39,4 @@ services:
     PhpMqtt\Client\Contracts\MqttClient: '@mqtt.client'
 
     PhpMqtt\Client\ConnectionSettings:
-        factory: ['Homebot\MQTT\SettingsFactory', 'create']
-
+        factory: '@Homebot\Bridge\Mqtt\SettingsFactory'

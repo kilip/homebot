@@ -1,0 +1,7 @@
+sensors:
+    power_meter:
+        - name: meter name
+          notes: meter notes
+          driver: tasmota
+          driverConfig:
+              topic: tele/em-main/SENSOR

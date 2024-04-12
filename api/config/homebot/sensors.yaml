@@ -1,0 +1,12 @@
+sensors:
+  power_meter:
+    - name: Main
+      notes: Grid power meter
+      driver: tasmota
+      driverConfig:
+          topic: tele/em-main/SENSOR
+    - name: Homelab
+      notes: Homelab power meter
+      driver: tasmota
+      driverConfig:
+          topic: tele/em-homelab/SENSOR
