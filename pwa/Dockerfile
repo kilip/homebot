@@ -2,7 +2,7 @@
 
 
 # Versions
-FROM node:20-alpine@sha256:66c7d989b6dabba6b4305b88f40912679aebd9f387a5b16ffa76dfb9ae90b060 AS node_upstream
+FROM node:20-alpine@sha256:2115b077b61137cafc02ee82ab3bc436f9680b6b8fafb0979ef5ad20b19944a4 AS node_upstream
 
 
 # Base stage for dev and build
