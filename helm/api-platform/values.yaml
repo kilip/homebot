@@ -55,7 +55,7 @@ postgresql:
     pullPolicy: IfNotPresent
     image:
       repository: bitnami/postgresql
-      tag: 16@sha256:cc55da2fa3660b5c97539cd050ac676c452e02693e1ed2e742f9e7bf07784755
+      tag: 16@sha256:fdc6979dbc5385089b763136b4a3f9be10cc91302d34bb0673a2838dc4a0c684
     resources:
       requests:
         memory: 50Mi
