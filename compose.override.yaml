@@ -37,7 +37,7 @@ services:
   
   mosquitto:
     container_name: homebot.mosquitto
-    image: public.ecr.aws/docker/library/eclipse-mosquitto:2.0.18@sha256:d84c9bd554489b5fa564df57d2d12c2e734185b2b2bfd8d62f9f91cb2cc0cdba
+    image: public.ecr.aws/docker/library/eclipse-mosquitto:2.0.18@sha256:7423b06c542d307d87eaacf7fd8409e4d534092e9de2f0e01fea713860603cfb
     restart: always
     volumes:
       - ./etc/mosquitto/mosquitto.passwd:/mosquitto/config/mosquitto.passwd:rw
