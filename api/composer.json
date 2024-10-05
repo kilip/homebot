@@ -87,7 +87,7 @@
     },
     "require-dev": {
         "api-platform/schema-generator": "^5.0",
-        "phpunit/phpunit": "9.6.x",
+        "phpunit/phpunit": "11.4.x",
         "symfony/browser-kit": "6.4.*",
         "symfony/css-selector": "6.4.*",
         "symfony/debug-bundle": "6.4.*",
