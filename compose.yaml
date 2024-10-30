@@ -39,6 +39,16 @@ services:
     environment:
       NEXT_PUBLIC_ENTRYPOINT: http://php
 
+  dragonfly:
+    container_name: homebot.dragonfly
+    image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
+    ulimits:
+      memlock: -1
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./vars/dragonflydata:/data
+
 ###> doctrine/doctrine-bundle ###
   database:
     container_name: homebot.db
